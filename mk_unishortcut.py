@@ -67,7 +67,7 @@ shortcutfile.write('\n')
 # Windows part
 shortcutfile.write(':: # Windows part\n')
 shortcutfile.write('@ECHO OFF\n')  
-shortcutfile.write('start ' + rel_targetpath + '\n') 
+shortcutfile.write('start ' + "'" + rel_targetpath + "'" + '\n') 
 shortcutfile.write('EXIT\n') 
 shortcutfile.close() 
 

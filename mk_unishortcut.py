@@ -25,7 +25,8 @@ if n_argv == 1:
     print(usage_text)
     # Return error
 elif n_argv == 2:
-    targetpath = path.abspath(sys.argv[1])
+    posix_arg = str(sys.argv[1]).replace("\\", "/")
+    targetpath = path.abspath(posix_arg)
 else:
     print(usage_text)
     # Return error
@@ -56,7 +57,7 @@ environments_dict = {'Cinnamon': ["'^.* cinnamon$'      ", 'gvfs-open'],
 # Dictionary based on work from https://github.com/alexeevdv/dename/blob/master/dename.sh    
 
 # Create shortcut file
-shortcutfile = open(shortcutpath,'w')
+shortcutfile = open(shortcutpath, 'w' , newline='\n')
 # Linux part 
 shortcutfile.write(':; # Linux part' + '\n')
 for key, value in environments_dict.items():
@@ -67,9 +68,11 @@ shortcutfile.write('\n')
 # Windows part
 shortcutfile.write(':: # Windows part\n')
 shortcutfile.write('@ECHO OFF\n')  
-shortcutfile.write('start ' + "'" + rel_targetpath + "'" + '\n') 
+shortcutfile.write('start ' +'""' + ' ' + '"' + rel_targetpath + '"' + '\n') 
 shortcutfile.write('EXIT\n') 
 shortcutfile.close() 
 
 # Change the permissions, to be executed
 os.chmod(shortcutpath, os.stat(shortcutpath).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+
+

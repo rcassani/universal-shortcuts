@@ -7,6 +7,7 @@ Created on Sun Jul  9 12:24:02 2017
 
 import sys
 import os
+import posixpath as path
 import stat
 
 # Usage text 
@@ -24,25 +25,25 @@ if n_argv == 1:
     print(usage_text)
     # Return error
 elif n_argv == 2:
-    targetpath = os.path.abspath(sys.argv[1])
+    targetpath = path.abspath(sys.argv[1])
 else:
     print(usage_text)
     # Return error
 
-if not(os.path.exists(targetpath)):
+if not(path.exists(targetpath)):
     print("The target '" + targetpath + "' does not exist")
     # Return error
 
 # Create path to shortcutfile
-shortcutpath = os.path.join(working_dir, str(os.path.basename(targetpath)) + '.cmd')
+shortcutpath = path.join(working_dir, str(path.basename(targetpath)) + '.cmd')
 
-if (os.path.exists(shortcutpath)):
+if (path.exists(shortcutpath)):
     print("The shortcut file '" + shortcutpath + "' already exist")
     print("Do you want to replace it?")
     # Return error
 
 # Find the relation between targetpath and working directory
-rel_targetpath = os.path.relpath(targetpath, start=working_dir)
+rel_targetpath = path.relpath(targetpath, start=working_dir)
 
 # Desktop Environment: [Extended Regular Expression , start-like command
 environments_dict = {'Cinnamon': ["'^.* cinnamon$'      ", 'gvfs-open'], 

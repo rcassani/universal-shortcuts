@@ -1,13 +1,10 @@
 # Universal Shortcut file
 
-I wrote this to create a shortcut file that can be used in Linux and Windows, a universal shortcut. Specifically, it might be useful for launchers in removable media, and files in cloud-storage services such as Dropbox.
+This Python script creates a "universal shortcut" file which hybrid Bash-Batch script that can be used in Linux and Windows to open a file or execute a program. Specifically, it might be useful for launchers in removable media, if the filesystem supports file permissions (FAT32 does not) and files in cloud-storage services such as Dropbox.
 
-While Windows supports Symbolic Links these are not always useful as the working directory is the one where the symbolic link is and not where the target is located.
+While Linux and Windows support symbolic links, when the target file is an executable, certain scripts and programs present problems when executed through a symbolic link, as the working directory is expected to be the directory containing the executable  and not the directory with the symbolic link.
 
 This universal shortcut consist in text file with bash code and bat code commented in such a way that the code for a different OS is ignored.
-
-Some of the properties are:
-It stores the relative path from the shortcut to the target, then, if any of this files is moved the shortcut is broken
 
 ## Usage
 The shortcut can be created either from Linux or Windows.
@@ -16,5 +13,4 @@ The shortcut can be created either from Linux or Windows.
 2. Execute `python3 mk_unishortcut.py <targetpath>`
 3. A file called `targetpath.cmd` will be created in the current Directory
 
-A previous unishortcut if existent, will be replaced.  
-The **target** can be either a file or a directory.
+The **targetpath** is the path to the target, and the target can be either a file or a directory.
